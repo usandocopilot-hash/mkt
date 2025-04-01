@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1a202c;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+input::placeholder {
+    color: #a0aec0;
+}
+
+button {
+    transition: all 0.3s ease-in-out;
+    transform: translateY(0);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    background: linear-gradient(145deg, #2d3748, #1a202c);
+    box-shadow: 8px 8px 15px #141923, -8px -8px 15px #202a36;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3), -10px -10px 20px rgba(255, 255, 255, 0.1);
+}
+
+.card img {
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.card img:hover {
+    transform: scale(1.1);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.card-title:hover {
+    color: #63b3ed;
+}
+
+.card-details {
+    color: #a0aec0;
+    font-size: 0.875rem;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-group input {
+    padding-left: 2.5rem;
+    border-radius: 8px;
+    background: #2d3748;
+    color: #ffffff;
+    transition: box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 0 3px #63b3ed;
+}
+
+.input-group svg {
+    position: absolute;
+    left: 1rem;
+    fill: #a0aec0;
+    width: 1.25rem;
+    height: 1.25rem;
+    pointer-events: none;
+}
+
+.modal {
+    background: #2d3748;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 4rem;
+    transition: width 0.3s ease-in-out, background-color 0.3s ease;
+    background: linear-gradient(145deg, #1f2937, #111827);
+    box-shadow: 8px 8px 15px #0d1117, -8px -8px 15px #1c2530;
+}
+
+.sidebar:hover {
+    width: 16rem;
+    background: linear-gradient(145deg, #374151, #1f2937);
+}
+
+.sidebar h2,
+.sidebar span {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar:hover h2,
+.sidebar:hover span {
+    opacity: 1;
+}
+
+.sidebar button {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar button:hover {
+    transform: scale(1.05);
+    background-color: #2563eb;
+}
+
+/* Notification styles */
+.notification {
+    background: linear-gradient(145deg, #16a34a, #15803d);
+    box-shadow: 8px 8px 15px #0f5132, -8px -8px 15px #1e7c4a;
+    border-radius: 8px;
+    padding: 1rem;
+    color: #ffffff;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.notification button:hover {
+    color: #d1fae5;
+}
+
+/* Chart container */
+.chart-container {
+    background: #1f2937;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 8px 8px 15px #0d1117, -8px -8px 15px #1c2530;
+}
