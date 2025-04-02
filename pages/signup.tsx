@@ -37,34 +37,34 @@ export default function Signup() {
                 <div className="flex justify-center mb-6">
                     <img src="/img/logo.png" alt="Logo" className="h-16" />
                 </div>
-                <h1 className="text-2xl font-bold text-center mb-6">Criar Conta</h1>
-                <p className="text-center text-gray-500 mb-6">Preencha os campos para se cadastrar</p>
+                <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">Criar Conta</h1>
+                <p className="text-center text-gray-600 mb-6">Preencha os campos para se cadastrar</p>
                 <div className="mb-4">
-                    <label className="block text-gray-700 mb-2">Usuário</label>
+                    <label className="block text-gray-800 mb-2">Usuário</label>
                     <input
                         type="text"
-                        className="w-full p-3 border rounded bg-gray-100"
+                        className="w-full p-3 border rounded bg-gray-50 text-gray-800"
                         placeholder="Digite seu usuário"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 mb-2">E-mail</label>
+                    <label className="block text-gray-800 mb-2">E-mail</label>
                     <input
                         type="email"
-                        className="w-full p-3 border rounded bg-gray-100"
+                        className="w-full p-3 border rounded bg-gray-50 text-gray-800"
                         placeholder="Digite seu e-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 mb-2">Senha</label>
+                    <label className="block text-gray-800 mb-2">Senha</label>
                     <div className="relative">
                         <input
                             type={showPassword ? 'text' : 'password'}
-                            className="w-full p-3 border rounded bg-gray-100"
+                            className="w-full p-3 border rounded bg-gray-50 text-gray-800"
                             placeholder="Digite sua senha"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -79,10 +79,10 @@ export default function Signup() {
                     </div>
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700 mb-2">Confirmar Senha</label>
+                    <label className="block text-gray-800 mb-2">Confirmar Senha</label>
                     <input
                         type="password"
-                        className="w-full p-3 border rounded bg-gray-100"
+                        className="w-full p-3 border rounded bg-gray-50 text-gray-800"
                         placeholder="Confirme sua senha"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -95,7 +95,7 @@ export default function Signup() {
                     Cadastrar
                 </button>
                 <div className="text-center mt-4">
-                    <p className="text-gray-500">
+                    <p className="text-gray-600">
                         Já tem uma conta?{' '}
                         <button className="text-blue-500 hover:underline" onClick={() => router.push('/login')}>
                             Faça login

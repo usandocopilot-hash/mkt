@@ -3,6 +3,8 @@ import { saveAs } from 'file-saver';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { useRouter } from 'next/router';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
 
 interface Campaign {
     id: number;
@@ -21,6 +23,21 @@ interface Task {
     dueDate: string;
     type: 'ACAO' | 'MARKETING' | 'R.H' | 'LOJA'; // Added type property
 }
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBdYXGoHqpxkjxYjNdRFdKaoZqVWsbzFrU",
+    authDomain: "db-tw-7391e.firebaseapp.com",
+    projectId: "db-tw-7391e",
+    storageBucket: "db-tw-7391e.firebasestorage.app",
+    messagingSenderId: "848837853895",
+    appId: "1:848837853895:web:f5257a45a76591cd0ab4e2",
+    measurementId: "G-ZCHN6BG4FP"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 export default function Home() {
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
@@ -69,9 +86,10 @@ Pix [Luis]
     useEffect(() => {
         const isAuthenticated = localStorage.getItem('authenticatedUser');
         if (!isAuthenticated) {
-            router.push('/login'); // Redirect to login if not authenticated
+            console.log('Usuário não autenticado. Redirecionando para login...');
+            router.push('/login'); // Redireciona para login se não autenticado
         }
-    }, []);
+    }, [router]);
 
     useEffect(() => {
         const savedCampaigns = localStorage.getItem('campaigns');
@@ -88,6 +106,16 @@ Pix [Luis]
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasks)); // Save tasks to localStorage
     }, [tasks]);
+
+    const saveActionsToFirebase = async (updatedActionsText: string) => {
+        const docRef = doc(db, 'actions', 'default');
+        await setDoc(docRef, { text: updatedActionsText });
+    };
+
+    const saveTasksToFirebase = async (updatedTasks: Task[]) => {
+        const docRef = doc(db, 'tasks', 'default');
+        await setDoc(docRef, { tasks: updatedTasks });
+    };
 
     const handleAddCampaign = () => {
         if (!newCampaign.name || !newCampaign.date || !newCampaign.month || newCampaign.spent === undefined) {
@@ -154,7 +182,9 @@ Pix [Luis]
             type: newTask.type as 'ACAO' | 'MARKETING' | 'R.H' | 'LOJA', // Ensure type is valid
         };
 
-        setTasks([...tasks, taskToAdd]);
+        const updatedTasks = [...tasks, taskToAdd];
+        setTasks(updatedTasks);
+        saveTasksToFirebase(updatedTasks); // Salva no Firebase
         setNewTask({});
         setShowModal(false);
         setNotification('Tarefa adicionada com sucesso!');
@@ -171,14 +201,18 @@ Pix [Luis]
             return;
         }
 
-        setTasks(tasks.map(task => (task.id === editTask.id ? { ...task, ...editTask } : task)));
+        const updatedTasks = tasks.map(task => (task.id === editTask.id ? { ...task, ...editTask } : task));
+        setTasks(updatedTasks);
+        saveTasksToFirebase(updatedTasks); // Salva no Firebase
         setEditTask(null);
         setShowModal(false);
         setNotification('Tarefa editada com sucesso!');
     };
 
     const handleDeleteTask = (id: number) => {
-        setTasks(tasks.filter(task => task.id !== id));
+        const updatedTasks = tasks.filter(task => task.id !== id);
+        setTasks(updatedTasks);
+        saveTasksToFirebase(updatedTasks); // Salva no Firebase
         setNotification('Tarefa excluída com sucesso!');
     };
 
@@ -258,6 +292,7 @@ Pix [Luis]
 
     const handleSaveActions = () => {
         localStorage.setItem('actionsText', actionsText);
+        saveActionsToFirebase(actionsText); // Salva no Firebase
         alert('Texto salvo com sucesso!');
     };
 
