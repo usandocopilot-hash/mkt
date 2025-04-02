@@ -67,6 +67,13 @@ Pix [Luis]
     const router = useRouter();
 
     useEffect(() => {
+        const isAuthenticated = localStorage.getItem('authenticatedUser');
+        if (!isAuthenticated) {
+            router.push('/login'); // Redirect to login if not authenticated
+        }
+    }, []);
+
+    useEffect(() => {
         const savedCampaigns = localStorage.getItem('campaigns');
         const savedBudgets = localStorage.getItem('monthlyBudget');
         if (savedCampaigns) setCampaigns(JSON.parse(savedCampaigns));
@@ -296,6 +303,9 @@ Pix [Luis]
         <div className="flex min-h-screen bg-gray-900 text-white">
             {/* Sidebar */}
             <div className="group w-16 hover:w-64 bg-gray-800 p-6 transition-all duration-300 ease-in-out">
+                <div className="flex justify-center mb-6">
+                    <img src="/img/logo.png" alt="Logo" className="h-12" />
+                </div>
                 <h2 className="text-2xl font-bold mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Dashboard
                 </h2>

@@ -10,14 +10,15 @@
         "chart.js": "^4.4.8",
         "file-saver": "^2.0.5",
         "next": "^13.0.0",
-        "react": "^18.0.0",
+        "react": "^18.3.1",
         "react-chartjs-2": "^5.3.0",
-        "react-dom": "^18.0.0"
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
         "@types/file-saver": "^2.0.7",
         "@types/node": "22.13.16",
-        "@types/react": "19.0.12",
+        "@types/react": "^19.0.12",
+        "@types/react-dom": "^19.1.1",
         "autoprefixer": "^10.0.0",
         "postcss": "^8.0.0",
         "tailwindcss": "^3.0.0",
